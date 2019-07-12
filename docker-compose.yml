@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  users.backend:
+    build:
+      context: backends/users.backend
+  products.backend:
+    build:
+      context: backends/products.backend
+  ocelot.api-gateway:
+    build:
+      context: api-gateways/ocelot.api-gateway
+    ports:
+      - 8081:80
+    depends_on:
+      - users.backend
+      - products.backend
+  krakend.api-gateway:
+    image: devopsfaith/krakend:0.9.0
+    volumes:
+      - ./api-gateways/krakend.api-gateway:/etc/krakend
+    command: run -c /etc/krakend/krakend.json > /dev/null 2>&1
+    environment:
+      GIN_MODE: release
+    ports:
+      - 8082:80
+
+  
