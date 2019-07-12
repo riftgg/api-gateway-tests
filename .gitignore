@@ -328,3 +328,9 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# JMeter tests auto-generated files
+perf-dashboard*
+temp
+jmeter.log
+results-*
