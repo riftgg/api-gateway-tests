@@ -1,0 +1,66 @@
+{
+    "version": 2,
+    "timeout": "3000ms",
+    "cache_ttl": "300s",
+    "port": 80,
+    "extra_config": {
+        "github_com/devopsfaith/krakend-gologging": {
+            "level":  "ERROR",
+            "prefix": "[KRAKEND]",
+            "syslog": false,
+            "stdout": false
+          }
+    },
+    "endpoints": [
+        {
+            "endpoint" : "/api/users",
+            "method": "GET",
+            "backend" : [
+                {
+                    "host": ["http://users.backend"],
+                    "url_pattern": "/api/users",
+                    "is_collection": "true",
+                    "encoding": "json"
+                }
+            ],
+            "output-encoding": "json"
+        },
+        {
+            "endpoint" : "/api/users/{userId}",
+            "method": "GET",
+            "backend" : [
+                {
+                    "host": ["http://users.backend"],
+                    "url_pattern": "/api/users/{userId}",
+                    "encoding": "json"
+                }
+            ],
+            "output-encoding": "json"
+        },
+        {
+            "endpoint" : "/api/products",
+            "method": "GET",
+            "backend" : [
+                {
+                    "host": ["http://products.backend"],
+                    "url_pattern": "/api/products",
+                    "is_collection": "true",
+                    "encoding": "json"
+                }
+            ],
+            "output-encoding": "json"
+        },
+        {
+            "endpoint" : "/api/products/{productId}",
+            "method": "GET",
+            "backend" : [
+                {
+                    "host": ["http://products.backend"],
+                    "url_pattern": "/api/products/{productId}",
+                    "encoding": "json"
+                }
+            ],
+            "output-encoding": "json"
+        }
+    ]
+}
