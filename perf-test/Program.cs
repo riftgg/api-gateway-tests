@@ -15,11 +15,16 @@ namespace PerfTest
             Console.WriteLine("Starting Krakend performance test");
             var krakendTestResult = await StartPerfTest(Constants.KRAKEND_BASE_URL);
             Console.WriteLine("Krakend test finished");
+            Console.WriteLine("Starting Envoy performance test");
+            var envoyTestResult = await StartPerfTest(Constants.KRAKEND_BASE_URL);
+            Console.WriteLine("Envoy test finished");
             Console.WriteLine("\n\n");
             Console.WriteLine("OCELOT RESULTS:");
             WriteTestsResults(ocelotTestResult);
             Console.WriteLine($"\n\nKRAKEND RESULTS:");
             WriteTestsResults(krakendTestResult);
+            Console.WriteLine($"\n\nENVOY RESULTS:");
+            WriteTestsResults(envoyTestResult);
         }
 
         static void WriteTestsResults(TestResult result)
